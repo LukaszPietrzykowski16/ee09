@@ -26,10 +26,11 @@
         <?php
         $db = mysqli_connect('localhost', 'root', '', 'sklep');
 
+
         if (mysqli_error($db) == true) {
             echo 'error';
         } else {
-            echo 'git';
+            echo 'good working';
         }
 
         echo "<table>
