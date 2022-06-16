@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 25 Paź 2017, 08:59
--- Wersja serwera: 10.1.19-MariaDB
--- Wersja PHP: 5.6.28
+-- Czas generowania: 13 Lis 2017, 10:09
+-- Wersja serwera: 10.1.28-MariaDB
+-- Wersja PHP: 7.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -58,6 +60,52 @@ INSERT INTO `dania` (`id`, `typ`, `nazwa`, `cena`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `gromady`
+--
+
+CREATE TABLE `gromady` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `nazwa` text,
+  `opis` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `gromady`
+--
+
+INSERT INTO `gromady` (`id`, `nazwa`, `opis`) VALUES
+(1, 'ryby', ''),
+(2, 'plazy', ''),
+(3, 'gady', ''),
+(4, 'ptaki', ''),
+(5, 'ssaki', '');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `odzywianie`
+--
+
+CREATE TABLE `odzywianie` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `rodzaj` text,
+  `informacja` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `odzywianie`
+--
+
+INSERT INTO `odzywianie` (`id`, `rodzaj`, `informacja`) VALUES
+(1, 'drapieznik', ''),
+(2, 'roslinozerny', ''),
+(3, 'padlinozerny', ''),
+(4, 'wszystkozerny', '');
+
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `ogloszenie`
 --
 
@@ -76,7 +124,7 @@ CREATE TABLE `ogloszenie` (
 
 INSERT INTO `ogloszenie` (`id`, `uzytkownik_id`, `kategoria`, `podkategoria`, `tytul`, `tresc`) VALUES
 (1, 1, 1, 12, 'Daniel Craig. Biografia', 'Biografia Daniela Craiga, niedrogo sprzedam'),
-(2, 1, 1, 13, 'Selekcja', 'Sprzedam: "Selekcja" J. Kellermana, niezniszczona'),
+(2, 1, 1, 13, 'Selekcja', 'Sprzedam: \"Selekcja\" J. Kellermana, niezniszczona'),
 (3, 2, 1, 13, 'Buick', 'Sprzedam horror Stephena Kinga w dobrym stanie'),
 (4, 2, 1, 14, 'Tytus, Romek i Atomek', 'Ks. IV do sprzedania, stan dobry'),
 (5, 2, 2, 0, 'Imagine Dragons', 'Sprzedam dwa CD Imagine Dragons');
@@ -113,7 +161,7 @@ INSERT INTO `podzespoly` (`id`, `typy_id`, `producenci_id`, `nazwa`, `opis`, `do
 (9, 5, 9, 'GeForce 210', 'Karta graficzna ASUS GeForce 210 1024MB 64bit PCI-E', 0, 145),
 (10, 6, 6, 'WD Black', 'Dysk WD Black WD1003FZEX 1TB sATA III 64MB', 0, 315),
 (11, 6, 6, 'WD Blue', 'Dysk WD Blue WD10EZEX 1TB sATA III 64MB', 1, 195),
-(12, 6, 5, 'AHD650-1TU3-CBK', 'Dysk USB ADATA AHD650-1TU3-CBK 1TB 2.5'' HD650 USB 3.0 Czarny', 1, 210);
+(12, 6, 5, 'AHD650-1TU3-CBK', 'Dysk USB ADATA AHD650-1TU3-CBK 1TB 2.5\' HD650 USB 3.0 Czarny', 1, 210);
 
 -- --------------------------------------------------------
 
@@ -143,77 +191,24 @@ INSERT INTO `pracownicy` (`id`, `imie`, `nazwisko`, `stanowisko`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `producenci`
---
-
-CREATE TABLE `producenci` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `nazwa` text,
-  `opis` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Zrzut danych tabeli `producenci`
---
-
-INSERT INTO `producenci` (`id`, `nazwa`, `opis`) VALUES
-(1, 'Intel', NULL),
-(2, 'AMD', NULL),
-(5, 'ADATA', NULL),
-(6, 'WD', NULL),
-(7, 'Kingstone', NULL),
-(8, 'Patriot', NULL),
-(9, 'ASUS', NULL);
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `samochody`
---
-
-CREATE TABLE `samochody` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `marka` text,
-  `model` text,
-  `rocznik` year(4) DEFAULT NULL,
-  `kolor` text,
-  `stan` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Zrzut danych tabeli `samochody`
---
-
-INSERT INTO `samochody` (`id`, `marka`, `model`, `rocznik`, `kolor`, `stan`) VALUES
-(1, 'Fiat', 'Punto', 2016, 'czerwony', 'bardzo dobry'),
-(2, 'Fiat', 'Punto', 2002, 'czerwony', 'dobry'),
-(3, 'Fiat', 'Punto', 2007, 'niebieski', 'bardzo bobry'),
-(4, 'Opel', 'Corsa', 2016, 'grafitowy', 'bardzo dobry'),
-(5, 'Opel', 'Astra', 2003, 'niebieski', 'porysowany lakier'),
-(6, 'Toyota', 'Corolla', 2016, 'czerwony', 'bardzo dobry'),
-(7, 'Toyota', 'Corolla', 2014, 'szary', 'dobry'),
-(8, 'Toyota', 'Yaris', 2004, 'granatowy', 'dobry');
-
--- --------------------------------------------------------
-
---
 -- Struktura tabeli dla tabeli `typy`
 --
 
 CREATE TABLE `typy` (
   `id` int(10) UNSIGNED NOT NULL,
-  `kategoria` text
+  `kategoria` text,
+  `opis` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `typy`
 --
 
-INSERT INTO `typy` (`id`, `kategoria`) VALUES
-(1, 'Procesor'),
-(2, 'RAM'),
-(5, 'karta graficzna'),
-(6, 'HDD');
+INSERT INTO `typy` (`id`, `kategoria`, `opis`) VALUES
+(1, 'Procesor', NULL),
+(2, 'RAM', NULL),
+(5, 'karta graficzna', NULL),
+(6, 'HDD', NULL);
 
 -- --------------------------------------------------------
 
@@ -326,6 +321,37 @@ INSERT INTO `zamowienia` (`id`, `Samochody_id`, `Klient`, `telefon`, `dataZam`) 
 (2, 6, 'Jan Nowakowski', '222111333', '2016-02-15'),
 (3, 8, 'Marcin Kolwal', '333111222', '2016-02-15');
 
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `zwierzeta`
+--
+
+CREATE TABLE `zwierzeta` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `Gromady_id` int(10) UNSIGNED NOT NULL,
+  `Odzywianie_id` int(10) UNSIGNED NOT NULL,
+  `gatunek` text,
+  `wystepowanie` text,
+  `czy_zagrozony` tinyint(1) DEFAULT NULL,
+  `obraz` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `zwierzeta`
+--
+
+INSERT INTO `zwierzeta` (`id`, `Gromady_id`, `Odzywianie_id`, `gatunek`, `wystepowanie`, `czy_zagrozony`, `obraz`) VALUES
+(1, 1, 1, 'Sum pospolity', 'Eurazja', 0, 'sum.jpg'),
+(2, 1, 1, 'Jesiotr zachodni', 'Europa', 1, 'jesiotr.jpg'),
+(3, 4, 4, 'Wrona siwa', 'Europa', 0, 'wrona.jpg'),
+(4, 4, 1, 'Puszczyk zwyczajny', 'Eurazja', 0, 'puszczyk.jpg'),
+(5, 4, 4, 'Sroka zwyczajna', 'Eurazja', 0, 'sroka.jpg'),
+(6, 5, 1, 'Wilk szary', 'Europa, Ameryka', 0, 'wilk.jpg'),
+(7, 5, 3, 'Hiena brunatna', 'Afryka', 0, 'hiena.jpg'),
+(8, 5, 2, 'Sarna europejska', 'Europa', 0, 'sarna.jpg'),
+(9, 5, 1, 'Dingo australijski', 'Australia', 1, 'dingo.jpg');
+
 --
 -- Indeksy dla zrzutów tabel
 --
@@ -334,6 +360,18 @@ INSERT INTO `zamowienia` (`id`, `Samochody_id`, `Klient`, `telefon`, `dataZam`) 
 -- Indexes for table `dania`
 --
 ALTER TABLE `dania`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `gromady`
+--
+ALTER TABLE `gromady`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `odzywianie`
+--
+ALTER TABLE `odzywianie`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -352,18 +390,6 @@ ALTER TABLE `podzespoly`
 -- Indexes for table `pracownicy`
 --
 ALTER TABLE `pracownicy`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `producenci`
---
-ALTER TABLE `producenci`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `samochody`
---
-ALTER TABLE `samochody`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -391,6 +417,12 @@ ALTER TABLE `zamowienia`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `zwierzeta`
+--
+ALTER TABLE `zwierzeta`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -399,51 +431,68 @@ ALTER TABLE `zamowienia`
 --
 ALTER TABLE `dania`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT dla tabeli `gromady`
+--
+ALTER TABLE `gromady`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT dla tabeli `odzywianie`
+--
+ALTER TABLE `odzywianie`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT dla tabeli `ogloszenie`
 --
 ALTER TABLE `ogloszenie`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT dla tabeli `podzespoly`
 --
 ALTER TABLE `podzespoly`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT dla tabeli `pracownicy`
 --
 ALTER TABLE `pracownicy`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT dla tabeli `producenci`
---
-ALTER TABLE `producenci`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT dla tabeli `samochody`
---
-ALTER TABLE `samochody`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT dla tabeli `typy`
 --
 ALTER TABLE `typy`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT dla tabeli `uzytkownik`
 --
 ALTER TABLE `uzytkownik`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT dla tabeli `wyniki`
 --
 ALTER TABLE `wyniki`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
 --
 -- AUTO_INCREMENT dla tabeli `zamowienia`
 --
 ALTER TABLE `zamowienia`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT dla tabeli `zwierzeta`
+--
+ALTER TABLE `zwierzeta`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

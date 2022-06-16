@@ -5,61 +5,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <style> 
-    body {
-        background-color: black;
-        color: white;
-    }
-
-    .tabela {
-        display: flex;
-        justify-content: center;
-    }
-    </style>
-
 </head>
-
-
 <body>
-    <div class="tabela">
-        <?php
-        $db = mysqli_connect('localhost', 'root', '', 'sklep');
+    <div class='first-script'>
+        <?php 
+            $db = mysqli_connect('localhost', 'root', '', 'ptaki');
 
+            $sql = "SELECT id, Gromady_id, gatunek, wystepowanie FROM `zwierzeta` WHERE Gromady_id=4 OR Gromady_id=5";
 
-        if (mysqli_error($db) == true) {
-            echo 'error';
-        } else {
-            echo 'good working';
-        }
+            $zapytanie = $db -> query($sql);
 
-        echo "<table>
-        <tr>
-            <th> numer </th>
-            <th> nazwa podzespolu </th>
-            <th> opis </th>
-            <th> cena </th>
-        </tr>
-        ";
+            foreach ($zapytanie as $row) {
+                echo '<div>';
+                echo $row['id'];
+                echo $row['gatunek'];
+                echo 'Wystepowanie:'.$row['wystepowanie'];
+                echo '</div>';
+            }
 
-        $zapytanie = 'SELECT id, nazwa, opis, cena FROM podzespoly WHERE cena < "1000"';
-
-        $wynik = $db -> query($zapytanie);
-
-        foreach ($wynik as $row) {
-            echo "<tr>";
-            echo "<td>".$row['id']."</td>";
-            echo "<td>".$row['nazwa']."</td>";
-            echo "<td>".$row['opis']."</td>";
-            echo "<td>".$row['cena']."</td>";
-            echo "</tr>";
-        }
-        echo "</table>";
-        mysqli_close($db);
+            mysqli_close($db);
         ?>
+
+        <?php 
+            $db2 = mysqli_connect('localhost', 'root', '', 'ptaki');
+
+            $sql2 = "SELECT gatunek, obraz FROM `zwierzeta` WHERE Gromady_id=4";
+
+            $zapytanie2 = $db2 -> query($sql2);
+
+            foreach ($zapytanie2 as $row2) {
+                echo '<div>';
+                echo $row2['gatunek'];
+                echo "<img src=".$row2['obraz']."/>";
+                echo '</div>';
+            }
+
+            mysqli_close($db2);
+        ?>
+
+        <img src="wrona.jpg"/>
     </div>
-
-
-
 </body>
 </html>
