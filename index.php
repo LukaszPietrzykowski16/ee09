@@ -45,5 +45,16 @@
 
         <img src="wrona.jpg"/>
     </div>
+
+    <div class="formularz">
+            <form method="POST">
+                <label> Imie: <label>
+                <input type="text" name="imie"> 
+                <label> Nazwisko: <label>
+                <input type="text" name="nazwisko"> 
+                <input type="submit" name="submit">
+            </form>
+
+    </div>
 </body>
 </html>
