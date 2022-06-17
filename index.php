@@ -52,9 +52,31 @@
                 <input type="text" name="imie"> 
                 <label> Nazwisko: <label>
                 <input type="text" name="nazwisko"> 
+                <label> stanowisko: <label>
+                <input type="text" name="stanowisko"> 
                 <input type="submit" name="submit">
             </form>
+            <?php
+                $db =  new mysqli('localhost', 'root', '', 'ptaki');
 
+                $imie = $_POST['imie'];
+                $nazwisko = $_POST['nazwisko'];
+                $stanowisko = $_POST['stanowisko'];
+
+                $sql = "INSERT INTO pracownicy (imie, nazwisko, stanowisko) VALUES ('$imie', '$nazwisko', '$stanowisko')";
+
+
+                if ($db -> connect_error) {
+                    echo 'error';
+                } else {
+                    $con = $db -> prepare($sql);
+                    $con -> execute();
+                    $con -> close();
+                }
+             
+
+                mysqli_close($db);
+            ?>
     </div>
 </body>
 </html>
