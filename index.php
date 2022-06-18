@@ -78,5 +78,22 @@
                 mysqli_close($db);
             ?>
     </div>
+
+    <div class="exercise">
+            <?php
+            $db = mysqli_connect('localhost', 'root', '', 'ptaki');
+
+            $zapytanie = 'SELECT nazwa FROM dania WHERE cena < 30';
+
+            $wynik = $db -> query($zapytanie);
+
+            foreach ($wynik as $row) {
+                echo $row['nazwa'];
+            }
+
+            ?>
+            
+
+    </div>
 </body>
 </html>
