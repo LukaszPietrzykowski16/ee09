@@ -5,35 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="zdjecie1">
-            <img src="logo.png">
-        </div>
-        <div class="zdjecie2">
-            <img src="cukierki1.png">
-        </div>
-    </header>
-    <div class="naglowek">
-        <h1> Zamów nasz produkt </h1>
+    <H2>Formularz kontaktowy</H2>
+    <form>
+        <label>Imię</label>
+        <input id="gowno"></intput></br>
+        <input></intput></br>
+        <input></intput></br>
+        <select>
+            <option id="hehe">heh</option>
+            <option id="hehent">hehent</option>
+        </select></form></br>
+        <input type="checkbox"></input>
+        <button type="submit" id="sram">Prześlij</button>
+        <button type="reset">Resetuj</button>
+    </form>
+    <div id="ide">
+
     </div>
-    <main>
-        <div class="tabelka">
-            <table>
-                <td> Kształty </td>
-                <td> Kolory </td>
-            </table>
-        </div>
-        <div class="formularz">
-            <form>
-                <label> Podaj numer kształtu: </label>
-                <input type="number"> 
-                <label> Podaj numer kształtu: </label>
-                <input type="number"> 
-            </form>
-        </div>
-    </main>
 </body>
+    <script>
+        function sranie()
+        {
+
+            console.log(imie.value);
+            document.getElementById("ide").innerHTML = imie.value+'</br>'+'Usluga:'+hehe.value;
+             //'Usluga:'+hehe.value;
+       
+
+        }
+        let submit = document.getElementById("sram");
+        submit.addEventListener("click", sranie);
+        let imie = document.getElementById("gowno");
+        let hehe = document.getElementById("hehe");
+        
+    </script>
 </html>
